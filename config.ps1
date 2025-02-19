@@ -9,13 +9,13 @@ $vpnUserName = Read-Host -Prompt 'Digite o nome de usuário da VPN sem @domínio
 $vpnPassword = Read-Host -Prompt 'Digite a senha da VPN' -AsSecureString
 
 #if (Get-VpnConnection -Name $vpnName -ErrorAction SilentlyContinue) { Remove-VpnConnection -Name $vpnName -Force ; remove-item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force ; remove-item "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force ; remove-item "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force }
-Remove-VpnConnection -Name $vpnName -Force -ErrorAction SilentlyContinue
-Remove-Item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
-Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
-Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+#Remove-VpnConnection -Name $vpnName -Force -ErrorAction SilentlyContinue
+#Remove-Item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+#Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+#Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
 
 Write-Host "Configurando $vpnName"
-sleep 10
+sleep 5
 #Add-VpnConnection -Name $vpnName -ServerAddress $vpnServer -TunnelType Automatic -AuthenticationMethod MSChapv2 -EncryptionLevel Required -SplitTunneling $false -DnsSuffix $dnsSuffix -Force
 
 $rasPhoneConfig = @"
@@ -149,10 +149,10 @@ TryNextAlternateOnFail=1
 
 $rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk"
 Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
-$rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
-Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
-$rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk"
-Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
+#$rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
+#Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
+#$rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk"
+#Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
 # Adiciona a credencial do Windows para a VPN
 $credential = New-Object System.Management.Automation.PSCredential ("$vpnUserName@$dnsSuffix", $vpnPassword)
 $target = $dnsSuffix
