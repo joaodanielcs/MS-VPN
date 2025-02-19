@@ -8,7 +8,6 @@ param (
 $vpnUserName = Read-Host -Prompt 'Digite o nome de usuário da VPN sem @domínio'
 $vpnPassword = Read-Host -Prompt 'Digite a senha da VPN' -AsSecureString
 
-#if (Get-VpnConnection -Name $vpnName -ErrorAction SilentlyContinue) { Remove-VpnConnection -Name $vpnName -Force ; remove-item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force ; remove-item "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force ; remove-item "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force }
 #Remove-VpnConnection -Name $vpnName -Force -ErrorAction SilentlyContinue
 #Remove-Item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
 #Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
