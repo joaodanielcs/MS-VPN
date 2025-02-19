@@ -63,6 +63,10 @@ Get-NetConnectionProfile | ForEach-Object {
     } 
 }
 rasdial $vpnName $vpnUserName $plainPassword
-
+clear
+sleep 10
+net use t: \\$dnsSuffix\global
+ls t:
+net use t: /del
 Write-Host "$vpnName Configurada com sucesso."
 Remove-Item (Get-PSReadlineOption).HistorySavePath -Force
