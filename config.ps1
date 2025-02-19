@@ -1,7 +1,7 @@
 param (
     [string]$vpnServer,
     [string]$vpnName,
-    [string]$dnsSuffix,
+    [string]$dnsSuffix
 )
 $vpnUserName = Read-Host -Prompt 'Digite o nome de usuário da VPN sem @domínio'
 $vpnPassword = Read-Host -Prompt 'Digite a senha da VPN' -AsSecureString
