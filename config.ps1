@@ -147,7 +147,7 @@ PromoteAlternates=0
 TryNextAlternateOnFail=1
 "@
 
-$rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
+$rasPhonePath = "%userprofile%\AppData\Roaming\Microsoft\Network\Connections\Pbk\rasphone.pbk"
 Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
 # Adiciona a credencial do Windows para a VPN
 $credential = New-Object System.Management.Automation.PSCredential ("$vpnUserName@$dnsSuffix", $vpnPassword)
