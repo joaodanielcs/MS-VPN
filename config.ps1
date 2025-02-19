@@ -25,6 +25,10 @@ PBVersion=8
 Type=2
 AutoLogon=0
 UseRasCredentials=1
+LowDateTime=-1630143456
+HighDateTime=31162960
+DialParamsUID=7004953
+Guid=D578A632DAF16F41A285CBB0D4AFB373
 VpnStrategy=0
 ExcludedProtocols=8
 LcpExtensions=1
@@ -145,11 +149,16 @@ TryNextAlternateOnFail=1
 
 $rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
 Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
+# Adiciona a credencial do Windows para a VPN
+$credential = New-Object System.Management.Automation.PSCredential ("$vpnUserName@$dnsSuffix", $vpnPassword)
+$target = $dnsSuffix
 $username = "$vpnUserName@$dnsSuffix"
-cmdkey /add:$dnsSuffix /user:$username /pass:$vpnPassword
+$credentials = New-Object -TypeName PSCredential -ArgumentList $username, $vpnPassword
+cmdkey /add:$target /user:$username /pass:$vpnPassword
 Get-NetConnectionProfile | ForEach-Object {
     if ($_.NetworkCategory -ne "Private") {
         Set-NetConnectionProfile -InputObject $_ -NetworkCategory Private
     }
 }
 Remove-Item (Get-PSReadlineOption).HistorySavePath -Force
+
