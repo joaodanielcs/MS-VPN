@@ -16,7 +16,7 @@ Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasph
 
 Write-Host "Configurando $vpnName"
 sleep 10
-Add-VpnConnection -Name $vpnName -ServerAddress $vpnServer -TunnelType Automatic -AuthenticationMethod MSChapv2 -EncryptionLevel Required -SplitTunneling $false -DnsSuffix $dnsSuffix -Force
+#Add-VpnConnection -Name $vpnName -ServerAddress $vpnServer -TunnelType Automatic -AuthenticationMethod MSChapv2 -EncryptionLevel Required -SplitTunneling $false -DnsSuffix $dnsSuffix -Force
 
 $rasPhoneConfig = @"
 [$vpnName]
