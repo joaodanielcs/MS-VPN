@@ -8,10 +8,10 @@ param (
 $vpnUserName = Read-Host -Prompt 'Digite o nome de usuário da VPN sem @domínio'
 $vpnPassword = Read-Host -Prompt 'Digite a senha da VPN' -AsSecureString
 
-#Remove-VpnConnection -Name $vpnName -Force -ErrorAction SilentlyContinue
-#Remove-Item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
-#Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
-#Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+Remove-VpnConnection -Name $vpnName -Force -ErrorAction SilentlyContinue
+Remove-Item "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk" -force -ErrorAction SilentlyContinue
 
 Write-Host "Configurando $vpnName"
 sleep 5
@@ -146,10 +146,10 @@ PromoteAlternates=0
 TryNextAlternateOnFail=1
 "@
 
-$rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk"
-Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
-#$rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
+#$rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\rasphone.pbk"
 #Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
+$rasPhonePath = "C:\ProgramData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
+Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
 #$rasPhonePath = "$env:APPDATA\Microsoft\Network\Connections\Pbk\Pbk\_hiddenPbk\rasphone.pbk"
 #Add-Content -Path $rasPhonePath -Value $rasPhoneConfig
 # Adiciona a credencial do Windows para a VPN
@@ -163,5 +163,7 @@ Get-NetConnectionProfile | ForEach-Object {
         Set-NetConnectionProfile -InputObject $_ -NetworkCategory Private
     }
 }
+Write-Host "$vpnName Configurada com sucesso."
+Get-VpnConnection
 Remove-Item (Get-PSReadlineOption).HistorySavePath -Force
 
