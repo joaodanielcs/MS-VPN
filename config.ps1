@@ -23,7 +23,7 @@ sleep 5
 cmdkey /add:$dnsSuffix /user:$username /pass:$plainPassword
 sleep 5
 Write-Host "Configurando $vpnName"
-Add-VpnConnection -Name $vpnName -ServerAddress $vpnServer -TunnelType Automatic -AuthenticationMethod MSChapv2 -EncryptionLevel Required -SplitTunneling $false -DnsSuffix $dnsSuffix -Force
+Add-VpnConnection -Name $vpnName -ServerAddress $vpnServer -TunnelType Pptp -AuthenticationMethod MSChapv2 -EncryptionLevel Required -SplitTunneling $false -DnsSuffix $dnsSuffix -Force
 $rasPhonePath = "$env:AppData\Microsoft\Network\Connections\Pbk\rasphone.pbk"
 $contents = Get-Content -Path $rasphonePath
 function Update-Value {
